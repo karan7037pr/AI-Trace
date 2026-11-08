@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: aitrace-rag-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./rag-api/Dockerfile
+    dockerContext: .
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: JEV_API_KEY
+        sync: false
+      - key: DASHBOARD_ORIGIN
+        sync: false

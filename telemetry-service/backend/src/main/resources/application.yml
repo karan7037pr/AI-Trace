@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: aitrace-telemetry-service
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: ${KAFKA_CONSUMER_GROUP:aitrace-telemetry-persistence}
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.add.type.headers: false
+  datasource:
+    url: ${TELEMETRY_DATABASE_URL:jdbc:postgresql://localhost:5433/telemetry}
+    username: ${TELEMETRY_DATABASE_USERNAME:telemetry}
+    password: ${TELEMETRY_DATABASE_PASSWORD:telemetry}
+    driver-class-name: org.postgresql.Driver
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+aitrace:
+  dashboard-origin: ${AITRACE_DASHBOARD_ORIGIN:http://localhost:5173}
+  kafka:
+    telemetry-topic: ${AITRACE_TELEMETRY_TOPIC:aitrace.telemetry.v1}
+    evaluation-topic: ${AITRACE_EVALUATION_TOPIC:aitrace.evaluation.jobs}

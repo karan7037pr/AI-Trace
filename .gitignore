@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.pyc
+data/
+*.jsonl
+.pytest_cache/
+.mypy_cache/
+dashboard/node_modules/
+dashboard/dist/

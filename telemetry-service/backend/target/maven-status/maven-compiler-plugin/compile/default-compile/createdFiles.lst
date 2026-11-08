@@ -1,0 +1,16 @@
+com/aitrace/telemetry/service/KafkaTelemetryProducer.class
+com/aitrace/telemetry/controller/EvaluationJobController.class
+com/aitrace/telemetry/TelemetryServiceApplication.class
+com/aitrace/telemetry/model/TelemetryEvent.class
+com/aitrace/telemetry/service/TracePersistenceService.class
+com/aitrace/telemetry/controller/ApiExceptionHandler.class
+com/aitrace/telemetry/config/WebConfig.class
+com/aitrace/telemetry/service/TelemetryValidationService.class
+com/aitrace/telemetry/controller/QueryController.class
+com/aitrace/telemetry/controller/TelemetryController.class
+com/aitrace/telemetry/repository/TelemetryQueryRepository.class
+com/aitrace/telemetry/service/EvaluationJobProducer.class
+com/aitrace/telemetry/config/KafkaConfig.class
+com/aitrace/telemetry/model/EvaluationJob.class
+com/aitrace/telemetry/service/TelemetryConsumer.class
+com/aitrace/telemetry/model/TelemetryBatch.class
