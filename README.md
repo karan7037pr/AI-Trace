@@ -117,11 +117,22 @@ observability dashboard is available at `/observability`.
 
 ### Free deployment shape
 
-- Deploy `dashboard/` as a Vercel or Render static site.
-- Deploy `rag-api/Dockerfile` as a Render web service.
-- Use a Neon PostgreSQL connection string for `DATABASE_URL` and enable
-  `CREATE EXTENSION vector` in that database.
-- Set `GROQ_API_KEY`, `JEV_API_KEY`, and `DASHBOARD_ORIGIN` only on Render.
+1. Create a Neon PostgreSQL database and run `CREATE EXTENSION vector` once.
+2. In Render, create a web service from this repository using the included
+   `render.yaml` Blueprint. It builds `rag-api/Dockerfile` and exposes
+   `/api/health` as its health check.
+3. Add these Render environment values: `DATABASE_URL`, `GROQ_API_KEY`,
+   `JEV_API_KEY`, and `DASHBOARD_ORIGIN`. `GROQ_MODEL` and `JEV_API_URL`
+   already have safe defaults in the Blueprint.
+4. In Vercel, import this repository with `dashboard` as the root directory.
+   Use `npm run build` as the build command and `dist` as the output directory.
+   Set `VITE_RAG_API_BASE_URL` to the deployed Render URL.
+5. Copy the Vercel URL into Render's `DASHBOARD_ORIGIN`, then redeploy the
+   Render service.
+
+Render's free web service can sleep when idle, so the first request after a
+quiet period may be slow. The free demo is intentionally not an authenticated
+multi-user production service.
 
 The public demo intentionally has no login system. A browser-generated workspace
 ID keeps documents from different demo sessions separate at the application

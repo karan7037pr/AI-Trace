@@ -5,12 +5,17 @@ services:
     plan: free
     dockerfilePath: ./rag-api/Dockerfile
     dockerContext: .
+    healthCheckPath: /api/health
     envVars:
       - key: DATABASE_URL
         sync: false
       - key: GROQ_API_KEY
         sync: false
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-20b
       - key: JEV_API_KEY
         sync: false
+      - key: JEV_API_URL
+        value: https://jeval.dev/api/v1/evaluate
       - key: DASHBOARD_ORIGIN
         sync: false
